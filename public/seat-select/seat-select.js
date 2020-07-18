@@ -58,6 +58,7 @@ const toggleFormContent = async (event) => {
 };
 
 const handleSubmit = async (event) => {
+
   event.preventDefault();
 
   const newReservation = {
@@ -84,4 +85,3 @@ const handleSubmit = async (event) => {
 };
 
 flightInput.addEventListener("change", toggleFormContent);
-confirmButton.addEventListener("submit", handleSubmit);
