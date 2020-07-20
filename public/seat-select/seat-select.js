@@ -80,8 +80,8 @@ const handleSubmit = async (event) => {
       },
     });
 
-		const reservations = await res.json();
-    console.log(reservations);
+		const id = await res.json();
+    window.location.replace(`/confirmed/${id}`)
   } catch { console.log("Error with form submission.") }
 };
 

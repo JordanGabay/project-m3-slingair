@@ -3,7 +3,13 @@ const { reservations }  = require('./test-data/reservations')
 const { uuid }          = require('uuidv4')
 
 function findId(id) {
-    return reservations.find((client) => client.id === id)
+    return reservations.find((client) => {
+        // console.log('1', client.id === id)
+        // console.log('2', client)
+        // console.log('3', typeof client.id)
+        // console.log('4', typeof id)
+        return client.id === id
+    })
 }
 
 const handleFlight = (req, res) => {
@@ -13,19 +19,27 @@ const handleFlight = (req, res) => {
 }
 
 const handleReservation = (req, res) => {
-    const reservation = { id: uuid(), ...req.body }
+    const id = uuid()
+    const reservation = { id, ...req.body }
     reservations.push(reservation)
-    res.send(reservations)
+    res.json(id)
 }
 
-function handleConfirmation (req, res) {
-    const clientId = req.params.id
-    const bookedClient = findId(clientId)
-    if (bookedClient !== undefined) {
-        res.render('./pages/confirm', {client: bookedClient})
+
+//render confirm page with info
+
+ function handleConfirmation (req, res) {
+    const { id } = req.params
+    // console.log(id)
+    const client =  findId(id)
+    console.log(client)
+    if (client !== undefined) {
+        res.render('pages/confirm', {client})
     } else { 
         console.log('keep trying')
     }
 }
 
-module.exports = { handleFlight, handleReservation, handleConfirmation}
+module.exports = { handleFlight, handleReservation, 
+    handleConfirmation
+}
