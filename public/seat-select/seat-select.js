@@ -59,7 +59,8 @@ const toggleFormContent = async (event) => {
 
 const handleSubmit = async (event) => {
 
-  event.preventDefault();
+  event.preventDefault()
+  document.getElementById('confirm-button').disabled = true
 
   const newReservation = {
 		givenName: document.getElementById("givenName").value,
