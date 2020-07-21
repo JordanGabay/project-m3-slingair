@@ -12,6 +12,12 @@ function findId(id) {
     })
 }
 
+function findEmail(email) {
+    return reservations.find((client) => {
+        return client.email === email
+    })
+}
+
 const handleFlight = (req, res) => {
     const { flightNumber } = req.params;
     const flight = flights[flightNumber]
@@ -32,7 +38,7 @@ const handleReservation = (req, res) => {
     const { id } = req.params
     // console.log(id)
     const client =  findId(id)
-    console.log(client)
+    // console.log(client)
     if (client !== undefined) {
         res.render('pages/confirm', {client})
     } else { 
@@ -40,6 +46,17 @@ const handleReservation = (req, res) => {
     }
 }
 
+const handleViewReservation = (req, res) => {
+    const {email} = req.params
+    const client = findEmail(email)
+    console.log('46', client)
+    if (client !== undefined) {
+        res.render('pages/view-reservation/reservation', {...client})
+    } else {
+        console.log('This aint it chief')
+    }
+    
+}
 module.exports = { handleFlight, handleReservation, 
-    handleConfirmation
+    handleConfirmation, handleViewReservation
 }

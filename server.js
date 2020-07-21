@@ -6,7 +6,7 @@ const morgan = require('morgan');
 
 
 const {
-    handleFlight, handleReservation, handleConfirmation
+    handleFlight, handleReservation, handleConfirmation, handleViewReservation
 } = require('./handlers')
 
 
@@ -27,5 +27,6 @@ express()
     .get('/flights/:flightNumber', handleFlight)
     .post('/reservation', handleReservation)
     .get('/confirmed/:id', handleConfirmation)
+    .get('/view-reservation/:email', handleViewReservation)
     .use((req, res) => res.send('Not Found'))
     .listen(process.env.PORT || 5000, () => console.log(`Listening on port 5000`));
